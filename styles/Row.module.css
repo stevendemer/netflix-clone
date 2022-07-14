@@ -5,11 +5,15 @@
   font-weight: 500;
 }
 
+.row {
+    margin-left: 20px;
+}
+
 .row__posters {
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
-    padding: 35px;
+    padding: 22px;
 }
 
 .row__posters::-webkit-scrollbar {
@@ -17,11 +21,13 @@
 }
 
 .row__poster {
+    cursor: pointer;
     object-fit: contain;
     width: 100vw;
-    max-height: 100px;
+    max-height: 130px;
     transition: transform 450ms;
     margin-right: 10px;
+    opacity: 0.9;
 }
 
 .row__poster:hover {
@@ -29,9 +35,19 @@
 }
 
 .__title {
-    font-size: 4rem;
-    font-family: 'BebasNue';
-    display: flex;
+    font-size: 1.5rem;
+    font-family: "Nunito, sans-serif";
     justify-content: center;
+    display: flex;
+    color: #ffff;
+    font-weight: 700;
+}
 
+.row__posterLarge {
+    max-height: 250px;
+}
+
+.row__posterLarge:hover {
+    transform: scale(1.10);
+    opacity: 1;
 }

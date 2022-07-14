@@ -1,0 +1,37 @@
+
+.nav {
+    position: fixed;
+    top: 12px;
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 22px;
+    align-items: center;
+    z-index: 1;
+}
+
+.nav__black {
+    background-color: #1111;
+}
+.nav__logo {
+    position: fixed;
+    left: 22px;
+    width: 80px;
+    object-fit: contain;
+}
+
+.button {
+    background-color: #D81F26;
+    color: black;
+    position: fixed;
+    padding: 8px;
+    right: 20px;
+    font-weight: 600;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.button:hover {
+    background-color: white;
+}

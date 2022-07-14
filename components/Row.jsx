@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import styles from "../styles/Row.module.css";
+import classNames from "classnames";
 
 const baseURL = "https://image.tmdb.org/t/p/original";
 
@@ -33,12 +34,12 @@ const Row = ({ title, fetchUrl, isLarge }) => {
     fetchData();
   }, [fetchUrl]);
 
-  console.log(movies);
+  const isLargeRow = isLarge ? styles.row__posterLarge : styles.row__poster;
 
   return (
     <div className="row">
       <h2 className={styles.__title}>{title}</h2>
-      <div className={styles.row__posters} padding={7}>
+      <div className={styles.row__posters}>
         {movies.map((movie) => (
           <div className={styles.row__poster} id={movie.id} key={movie.id}>
             <motion.div
@@ -46,6 +47,7 @@ const Row = ({ title, fetchUrl, isLarge }) => {
               whileHover={{ scale: 1.08 }}
             >
               <img
+                className={`${isLargeRow}`}
                 src={`${baseURL}${
                   isLarge ? movie.poster_path : movie.backdrop_path
                 }`}
