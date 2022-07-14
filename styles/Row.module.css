@@ -1,0 +1,37 @@
+
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('../public//BebasNeue/BebasNeue-Regular.ttf');
+  font-weight: 500;
+}
+
+.row__posters {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: 35px;
+}
+
+.row__posters::-webkit-scrollbar {
+    display: none;
+}
+
+.row__poster {
+    object-fit: contain;
+    width: 100vw;
+    max-height: 100px;
+    transition: transform 450ms;
+    margin-right: 10px;
+}
+
+.row__poster:hover {
+    transform: scale(1.08);
+}
+
+.__title {
+    font-size: 4rem;
+    font-family: 'BebasNue';
+    display: flex;
+    justify-content: center;
+
+}
