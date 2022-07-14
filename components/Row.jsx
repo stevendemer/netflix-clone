@@ -1,24 +1,16 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "../utils/axiosConfig";
-import {
-  Image,
-  Container,
-  Box,
-  Flex,
-  Heading,
-  Text,
-  Stack,
-} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import styles from "../styles/Row.module.css";
-import classNames from "classnames";
+import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 const baseURL = "https://image.tmdb.org/t/p/original";
 
 const Row = ({ title, fetchUrl, isLarge }) => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [trailerURL, setTrailerURL] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -34,7 +26,28 @@ const Row = ({ title, fetchUrl, isLarge }) => {
     fetchData();
   }, [fetchUrl]);
 
+  const opts = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
   const isLargeRow = isLarge ? styles.row__posterLarge : styles.row__poster;
+
+  const handleClick = (movie) => {
+    if (trailerURL) {
+      setTrailerURL("");
+    } else {
+      movieTrailer(movie?.name || "")
+        .then((url) => {
+          const urlParams = new URLSearchParams(new URL(url).search);
+          setTrailerURL(urlParams.get("v"));
+        })
+        .catch((error) => console.log(error));
+    }
+  };
 
   return (
     <div className="row">
@@ -47,6 +60,7 @@ const Row = ({ title, fetchUrl, isLarge }) => {
               whileHover={{ scale: 1.08 }}
             >
               <img
+                onClick={() => handleClick(movie)}
                 className={`${isLargeRow}`}
                 src={`${baseURL}${
                   isLarge ? movie.poster_path : movie.backdrop_path
@@ -57,6 +71,7 @@ const Row = ({ title, fetchUrl, isLarge }) => {
           </div>
         ))}
       </div>
+      {trailerURL && <YouTube videoId={trailerURL} opts={opts} />}
     </div>
   );
 };
